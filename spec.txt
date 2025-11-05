@@ -1,0 +1,270 @@
+{
+  "project_name": "Passport & NID Document Processing System with Liveness Detection",
+  "project_type": "Streamlit Web Application with API",
+  "overview": "Build a document information extraction system that processes passports and National IDs (primarily UAE EID) from various formats, extracts text and images, performs face detection from documents, captures live selfies with liveness detection, and matches faces. The system should have two modes: native-only processing and API-enhanced processing.",
+  "core_requirements": {
+    "document_processing": {
+      "supported_documents": [
+        "Passports (South Asia, Middle East, Europe, Africa, China, Russia)",
+        "UAE National ID (EID)",
+        "Other regional NIDs"
+      ],
+      "supported_formats": ["PDF", "JPG", "JPEG", "PNG", "BMP", "TIFF"],
+      "extraction_capabilities": [
+        "Text extraction (OCR) - all document fields",
+        "Face photo extraction from document",
+        "MRZ (Machine Readable Zone) parsing for passports",
+        "Structured data output (JSON format)"
+      ]
+    },
+    "liveness_detection": {
+      "description": "Capture live selfie with anti-spoofing",
+      "requirements": [
+        "Real-time camera access via browser",
+        "Liveness check (blink detection, head movement, or passive liveness)",
+        "Face capture and storage",
+        "Quality validation (brightness, blur, face visibility)"
+      ]
+    },
+    "face_matching": {
+      "description": "Compare document face with live captured face",
+      "requirements": [
+        "Face comparison score/confidence",
+        "Threshold-based pass/fail decision",
+        "Visual similarity report"
+      ]
+    }
+  },
+  "technical_architecture": {
+    "modes": {
+      "native_mode": {
+        "description": "Use only open-source Python libraries",
+        "libraries": [
+          "pytesseract (OCR)",
+          "opencv-python (image processing, face detection)",
+          "pdf2image (PDF conversion)",
+          "Pillow (image manipulation)",
+          "passporteye or custom MRZ parser",
+          "face_recognition or deepface (face matching)",
+          "dlib (face landmarks for liveness)"
+        ]
+      },
+      "api_mode": {
+        "description": "Enhanced accuracy with third-party APIs",
+        "suggested_apis": [
+          "Azure Computer Vision / Form Recognizer (OCR & document analysis)",
+          "AWS Textract (document extraction)",
+          "Google Cloud Vision API (OCR)",
+          "Face++ or AWS Rekognition (face detection & matching)",
+          "Any specialized liveness detection API"
+        ],
+        "note": "Make API credentials configurable via environment variables or config file"
+      }
+    },
+    "framework": "Streamlit",
+    "database": "SQLite or JSON file storage for extracted data",
+    "api_layer": {
+      "type": "RESTful API",
+      "framework": "FastAPI (embedded or separate)",
+      "endpoints": [
+        {
+          "method": "POST",
+          "path": "/api/extract-document",
+          "description": "Upload document, returns extracted data and face image",
+          "input": "multipart/form-data with document file",
+          "output": "JSON with extracted fields, base64 face image"
+        },
+        {
+          "method": "POST",
+          "path": "/api/capture-liveness",
+          "description": "Capture and verify live face",
+          "input": "base64 image or video stream",
+          "output": "JSON with liveness score and face image"
+        },
+        {
+          "method": "POST",
+          "path": "/api/match-faces",
+          "description": "Compare document face with live face",
+          "input": "two image references or base64 images",
+          "output": "JSON with match score and decision"
+        },
+        {
+          "method": "GET",
+          "path": "/api/health",
+          "description": "Health check endpoint"
+        }
+      ]
+    }
+  },
+  "ui_requirements": {
+    "streamlit_interface": [
+      {
+        "section": "Mode Selection",
+        "description": "Toggle between Native Mode and API Mode"
+      },
+      {
+        "section": "Document Upload",
+        "description": "File uploader supporting PDF, JPG, BMP, PNG, etc.",
+        "features": ["Drag-and-drop", "File format validation", "Preview uploaded document"]
+      },
+      {
+        "section": "Document Processing Results",
+        "features": [
+          "Display extracted text fields in organized format",
+          "Show extracted face image from document",
+          "Display confidence scores",
+          "Download extracted data as JSON"
+        ]
+      },
+      {
+        "section": "Live Capture",
+        "features": [
+          "Camera access with live preview",
+          "Liveness detection instructions",
+          "Capture button",
+          "Display captured face image"
+        ]
+      },
+      {
+        "section": "Face Matching",
+        "features": [
+          "Side-by-side comparison of document face vs live face",
+          "Match percentage/score",
+          "Pass/Fail indicator",
+          "Threshold configuration"
+        ]
+      },
+      {
+        "section": "History/Records",
+        "description": "View previous extractions and matches"
+      }
+    ]
+  },
+  "deployment_requirements": {
+    "hosting": "Self-hosted on client server",
+    "deliverables": [
+      "Complete source code with comments",
+      "Requirements.txt with all dependencies",
+      "Installation guide (README.md)",
+      "Configuration file template",
+      "API documentation (OpenAPI/Swagger)",
+      "Docker configuration (optional but recommended)"
+    ],
+    "documentation": [
+      "User manual for operating the application",
+      "Developer guide for modifications",
+      "Training guide for adding new document formats",
+      "Troubleshooting guide"
+    ]
+  },
+  "specific_extraction_fields": {
+    "passport": [
+      "Full Name",
+      "Passport Number",
+      "Nationality",
+      "Date of Birth",
+      "Gender",
+      "Issue Date",
+      "Expiry Date",
+      "Place of Birth",
+      "MRZ lines",
+      "Face photograph"
+    ],
+    "uae_eid": [
+      "ID Number",
+      "Full Name (English and Arabic)",
+      "Nationality",
+      "Date of Birth",
+      "Gender",
+      "Issue Date",
+      "Expiry Date",
+      "Face photograph"
+    ]
+  },
+  "advanced_features": {
+    "configurable_settings": [
+      "OCR confidence threshold",
+      "Face match threshold",
+      "Liveness detection sensitivity",
+      "Supported document types (enable/disable)"
+    ],
+    "data_validation": [
+      "Date format validation",
+      "Expiry date warnings",
+      "Document number format checks",
+      "Face quality checks"
+    ],
+    "training_mode": {
+      "description": "Admin interface to add/modify document templates",
+      "features": [
+        "Upload sample document",
+        "Mark field locations",
+        "Define extraction rules",
+        "Test extraction accuracy"
+      ]
+    }
+  },
+  "security_requirements": [
+    "Secure file upload validation",
+    "API authentication (API keys or tokens)",
+    "Data encryption at rest (if storing sensitive data)",
+    "HTTPS support for API",
+    "Input sanitization",
+    "Rate limiting on API endpoints"
+  ],
+  "performance_requirements": [
+    "Document processing: < 10 seconds per document",
+    "Face matching: < 3 seconds",
+    "Support concurrent API requests",
+    "Efficient memory management for large PDFs"
+  ],
+  "testing_requirements": [
+    "Test with sample passports from multiple countries",
+    "Test with various image qualities",
+    "Test with different PDF formats",
+    "Test liveness detection with photos/videos (should fail)",
+    "Test face matching accuracy with different lighting conditions"
+  ],
+  "code_structure": {
+    "suggested_modules": [
+      "document_processor.py - Core document extraction logic",
+      "ocr_engine.py - OCR wrapper (native and API modes)",
+      "face_detector.py - Face detection and extraction",
+      "liveness_checker.py - Liveness detection logic",
+      "face_matcher.py - Face comparison logic",
+      "api_server.py - FastAPI implementation",
+      "streamlit_app.py - Main UI application",
+      "config.py - Configuration management",
+      "utils.py - Helper functions",
+      "models/ - Data models/schemas"
+    ]
+  },
+  "video_demo_requirements": {
+    "native_mode_demo": [
+      "Upload passport (show extraction)",
+      "Upload UAE EID (show extraction)",
+      "Show face extraction from document",
+      "Capture live selfie with liveness",
+      "Perform face matching",
+      "Show results and confidence scores"
+    ],
+    "api_mode_demo": [
+      "Same workflow as native mode",
+      "Highlight improved accuracy/speed",
+      "Show API configuration"
+    ],
+    "api_testing": [
+      "Demonstrate API calls using Postman or curl",
+      "Show JSON request/response examples"
+    ]
+  },
+  "success_criteria": [
+    "Successfully extracts text from passports of target regions with >85% accuracy",
+    "Correctly extracts face images from documents",
+    "Liveness detection prevents photo/video spoofing",
+    "Face matching achieves >90% accuracy on good quality images",
+    "API responds reliably with proper error handling",
+    "Code is well-documented and modifiable",
+    "Client team can be trained to add new document formats"
+  ]
+}

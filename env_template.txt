@@ -1,0 +1,53 @@
+# Application Settings
+DEBUG=False
+PROCESSING_MODE=native
+
+# Database
+DATABASE_URL=sqlite:///./documents.db
+
+# OCR Settings
+TESSERACT_PATH=
+OCR_CONFIDENCE_THRESHOLD=60.0
+
+# Face Matching
+FACE_MATCH_THRESHOLD=0.6
+FACE_DISTANCE_THRESHOLD=0.6
+
+# Liveness Detection
+LIVENESS_SENSITIVITY=medium
+BLINK_THRESHOLD=2
+MIN_FACE_SIZE=100
+
+# File Upload
+MAX_FILE_SIZE=10485760
+
+# Azure API Keys (for API mode)
+AZURE_CV_KEY=
+AZURE_CV_ENDPOINT=
+AZURE_FORM_KEY=
+AZURE_FORM_ENDPOINT=
+
+# AWS API Keys (for API mode)
+AWS_ACCESS_KEY=
+AWS_SECRET_KEY=
+AWS_REGION=us-east-1
+
+# Google Cloud (for API mode)
+GOOGLE_APPLICATION_CREDENTIALS=
+
+# API Server
+API_HOST=0.0.0.0
+API_PORT=8000
+API_KEY=your_secure_api_key_here
+
+# Security
+SECRET_KEY=your_secret_key_here_change_in_production
+
+# Rate Limiting
+RATE_LIMIT_REQUESTS=100
+RATE_LIMIT_PERIOD=3600
+
+# Performance
+MAX_WORKERS=4
+PROCESSING_TIMEOUT=30
+

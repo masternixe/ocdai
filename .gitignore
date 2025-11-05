@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment variables
+.env
+.env.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+documents.db
+
+# Uploads and generated files
+uploads/
+extracted_faces/
+live_captures/
+temp/
+*.log
+
+# Models
+*.dat
+*.pkl
+*.h5
+*.pb
+shape_predictor_68_face_landmarks.dat
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Distribution
+*.tar.gz
+*.zip
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Streamlit
+.streamlit/
+
