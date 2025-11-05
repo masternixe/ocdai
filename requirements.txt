@@ -13,7 +13,7 @@ numpy==1.24.0
 
 # MRZ and Document Parsing
 passporteye==2.2.0
-mrz==0.6.0
+mrz==0.6.2
 
 # Face Recognition (lightweight version for cloud)
 face-recognition==1.3.0
