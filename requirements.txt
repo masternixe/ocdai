@@ -1,46 +1,36 @@
 # Core Framework
-streamlit>=1.28.0
-fastapi>=0.104.0
-uvicorn[standard]>=0.24.0
-python-multipart>=0.0.6
+streamlit==1.28.0
+fastapi==0.104.0
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
 
 # Document Processing
-pytesseract>=0.3.10
-pdf2image>=1.16.3
-Pillow>=10.1.0
-opencv-python>=4.8.1
-numpy>=1.24.0
+pytesseract==0.3.10
+pdf2image==1.16.3
+Pillow==10.1.0
+opencv-python-headless==4.8.1.78
+numpy==1.24.0
 
 # MRZ and Document Parsing
-passporteye>=2.2.0
-mrz>=0.6.0
+passporteye==2.2.0
+mrz==0.6.0
 
-# Face Recognition and Matching
-face-recognition>=1.3.0
-deepface>=0.0.79
-dlib>=19.24.0
+# Face Recognition (lightweight version for cloud)
+face-recognition==1.3.0
+cmake==3.27.0
 
 # Database
-sqlalchemy>=2.0.23
-
-# API Clients (for API mode)
-azure-ai-formrecognizer>=3.3.0
-azure-cognitiveservices-vision-computervision>=0.9.0
-boto3>=1.29.0
-google-cloud-vision>=3.4.5
+sqlalchemy==2.0.23
 
 # Security and Validation
-pydantic>=2.5.0
-python-jose[cryptography]>=3.3.0
-passlib[bcrypt]>=1.7.4
-python-dotenv>=1.0.0
+pydantic==2.5.0
+python-dotenv==1.0.0
 
 # Utilities
-requests>=2.31.0
-aiofiles>=23.2.1
-python-dateutil>=2.8.2
+requests==2.31.0
+python-dateutil==2.8.2
 
 # Additional tools
-streamlit-webrtc>=0.47.0
-av>=10.0.0
+streamlit-webrtc==0.47.0
+av==10.0.0
 
